@@ -14,7 +14,7 @@ const closeModal = document.getElementById('closeModal');
 const imageOptions = document.getElementById('imageOptions');
 const selfDestructBtn = document.getElementById('selfDestructBtn');
 
-const socket = io('https://3000-alphatheass-locationbas-99o6ynwmkzu.ws-us114.gitpod.io');
+const socket = io('https://location-based.onrender.com');
 let replyingTo = null;
 let uploadedImage = null;
 
@@ -148,7 +148,7 @@ imageUpload.addEventListener('change', async (e) => {
   formData.append('image', file);
 
   try {
-    const response = await fetch('https://3000-alphatheass-locationbas-99o6ynwmkzu.ws-us114.gitpod.io/upload', {
+    const response = await fetch('https://location-based.onrender.com/upload', {
       method: 'POST',
       body: formData
     });

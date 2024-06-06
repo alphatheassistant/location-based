@@ -43,7 +43,7 @@ app.get('/', (req, res) => {
 // Image upload endpoint
 app.post('/upload', upload.single('image'), (req, res) => {
   if (!req.file) return res.status(400).send('No file uploaded.');
-  const imageUrl = `https://3000-alphatheass-locationbas-99o6ynwmkzu.ws-us114.gitpod.io/uploads/${req.file.filename}`;
+  const imageUrl = `https://location-based.onrender.com/uploads/${req.file.filename}`;
   res.json({ imageUrl });
 });
 
