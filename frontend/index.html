@@ -3,17 +3,58 @@
 <head>
   <meta charset="UTF-8">
   <title>LoChat - Nearby Chat App</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; }
+    #chat { background: #f4f4f4; border-radius: 10px; padding: 20px; display: none; }
+    #messages { list-style-type: none; padding: 0; }
+    .message { background: white; padding: 10px; border-radius: 10px; margin-bottom: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    .message .text { margin-bottom: 10px; }
+    .message .actions { display: flex; justify-content: space-between; }
+    .message button { background: #007bff; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; }
+    .message button:hover { background: #0056b3; }
+    .reply { margin-top: 10px; background: #e9ecef; padding: 10px; border-radius: 5px; font-style: italic; }
+    #msgForm { display: flex; margin-top: 20px; }
+    #msgInput { flex-grow: 1; padding: 10px; border: 1px solid #ced4da; border-radius: 5px; }
+    #msgForm button { background: #28a745; color: white; border: none; padding: 10px 20px; border-radius: 5px; margin-left: 10px; cursor: pointer; }
+    #msgForm button:hover { background: #218838; }
+    #replyingTo { background: #ffc107; color: #212529; padding: 10px; border-radius: 5px; margin-bottom: 10px; display: none; }
+    #cancelReply { background: #dc3545; margin-left: 10px; }
+    #cancelReply:hover { background: #a71d2a; }
+    #imageUpload { display: none; }
+    .message img { max-width: 100%; border-radius: 10px; margin-top: 10px; cursor: pointer; }
+    #imageModal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.9); }
+    #imageModal img { display: block; max-width: 90%; max-height: 90%; margin: auto; }
+    #closeModal { color: white; position: absolute; top: 15px; right: 35px; font-size: 40px; font-weight: bold; cursor: pointer; }
+    #imageOptions { display: none; background: #333; padding: 10px; border-radius: 5px; }
+    #selfDestructBtn { background: #ff6f61; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; }
+  </style>
 </head>
 <body>
   <h1>LoChat</h1>
   <div id="status"></div>
-  <div id="chat" style="display:none;">
+  <div id="chat">
+    <div id="replyingTo">
+      Replying to: <span id="replyingToText"></span>
+      <button id="cancelReply">Cancel Reply</button>
+    </div>
     <ul id="messages"></ul>
     <form id="msgForm">
       <input type="text" id="msgInput" placeholder="Type a message...">
+      <input type="file" id="imageUpload" accept="image/*">
+      <button type="button" id="imageBtn">📷</button>
       <button type="submit">Send</button>
     </form>
   </div>
+
+  <div id="imageModal">
+    <span id="closeModal">&times;</span>
+    <img id="fullImage">
+  </div>
+
+  <div id="imageOptions">
+    <button id="selfDestructBtn">Self-Destruct (10s)</button>
+  </div>
+
   <script src="https://cdn.socket.io/4.5.0/socket.io.min.js"></script>
   <script src="app.js"></script>
 </body>
